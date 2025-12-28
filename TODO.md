@@ -1,1 +1,0 @@
-- [x] Change BottomNavigationBarType back to fixed in lib/main.dart

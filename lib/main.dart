@@ -78,7 +78,7 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: badges.Badge(
-        badgeContent: Text('0', style: TextStyle(color: Colors.white)),
+        badgeContent: Text('99+', style: TextStyle(color: Colors.white)),
         child: FloatingActionButton(
           heroTag: 'cart_fab',
           onPressed: () => Get.toNamed('/cart'),
