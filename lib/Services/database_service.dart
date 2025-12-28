@@ -74,5 +74,4 @@ class DatabaseService {
       'email': 'arkaryan.info@gmail.com',
     });
   }
-  
 }
