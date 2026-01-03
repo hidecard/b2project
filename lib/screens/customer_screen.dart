@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controller/customer.dart';
+import '../models/customer.dart';
 
 
 class CustomerScreen extends StatefulWidget {
-  const CustomerScreen({super.key});
+  final CustomerController customerController = Get.find<CustomerController>();
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  CustomerScreen({super.key});
 
   @override
   State<CustomerScreen> createState() => _CustomerScreenState();

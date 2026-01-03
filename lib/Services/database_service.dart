@@ -1,10 +1,6 @@
-import '../models/cart_item.dart';
-import '../models/customer.dart';
-import '../models/order.dart';
-import '../models/product.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:get/get.dart';
 import 'package:path/path.dart';
+import '../models/customer.dart';
 
 class DatabaseService {
   static Database? _database;
@@ -18,6 +14,8 @@ class DatabaseService {
     _database = await _initDB();
     return _database!;
   }
+
+
   Future<Database> _initDB() async {
     String path = join(await getDatabasesPath(), dbName);
     return await openDatabase(
@@ -73,5 +71,35 @@ class DatabaseService {
       'phone': '09758340371',
       'email': 'arkaryan.info@gmail.com',
     });
+  }
+
+  // customer CRUD
+Future<List<Customer>> getCustomers() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(tableCustomers);
+    return List.generate(maps.length, (i) => Customer.fromMap(maps[i]));
+  }
+
+  Future<void> addCustomer(Customer customer) async {
+    final db = await database;
+    await db.insert(
+      tableCustomers,
+      customer.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+  Future<void> updateCustomer(Customer customer) async {
+    final db = await database;
+    await db.update(
+      tableCustomers,
+      customer.toMap(),
+      where: 'id = ?',
+      whereArgs: [customer.id],
+    );
+  }
+
+  Future<void> deleteCustomer(int id) async {
+    final db = await database;
+    await db.delete(tableCustomers, where: 'id = ?', whereArgs: [id]);
   }
 }
